@@ -83,7 +83,7 @@ function Navbar() {
                   </Link>
                 </Dropdown.Item>
               )}
-              {state.user.role === 'user' ? (
+              {/* {state.user.role === 'user' ? (
                 <Dropdown.Item>
                   <Link to={'/payment'}>
                     <div className="pb-1">
@@ -98,7 +98,7 @@ function Navbar() {
                 </Dropdown.Item>
               ) : (
                 <></>
-              )}
+              )} */}
 
               <Dropdown.Divider className="border-rose-400" />
               <Dropdown.Item>

@@ -29,21 +29,21 @@ func RepositoryTransaction(db *gorm.DB) *repository {
 
 func (r *repository) FindTransaction() ([]models.Transaction, error) {
 	var transaction []models.Transaction
-	err := r.db.Preload("User").Preload("Ticket").Find(&transaction).Error
+	err := r.db.Preload("User").Preload("Ticket.DestinationStation").Preload("Ticket.StartStation").Find(&transaction).Error
 
 	return transaction, err
 }
 
 func (r *repository) GetTransaction(ID int) (models.Transaction, error) {
 	var transaction models.Transaction
-	err := r.db.Preload("User").Preload("Ticket").First(&transaction, ID).Error
+	err := r.db.Preload("User").Preload("Ticket.DestinationStation").First(&transaction, ID).Error
 
 	return transaction, err
 }
 
 func (r *repository) GetOneTransaction(ID string) (models.Transaction, error) {
 	var transaction models.Transaction
-	err := r.db.Preload("Ticket").Preload("User").First(&transaction, "id = ?", ID).Error
+	err := r.db.Preload("Ticket.DestinationStation").Preload("User").First(&transaction, "id = ?", ID).Error
 
 	return transaction, err
 }

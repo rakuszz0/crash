@@ -36,13 +36,13 @@ export default function ListTransaction() {
                         {ticktrans?.map((itemt, index) => (
                             <Table.Row>
                                 <Table.Cell>{itemt.id}</Table.Cell>
-                                <Table.Cell>{itemt.user_id}</Table.Cell>
-                                <Table.Cell>{itemt.ticket_id}</Table.Cell>
+                                <Table.Cell>{itemt.user.fullname}</Table.Cell>
+                                <Table.Cell>{itemt.ticket.destination_station.name} - {itemt.ticket.start_station.name}</Table.Cell>
                                 <Table.Cell>{itemt.status}</Table.Cell>
                                 <Table.Cell>
                                     <div className="flex justify-between">
                                         <img className="cursor-pointer" onClick={() => setModal(true)} src={action} alt="" />
-                                        <img className="cursor-pointer" onClick={() => setEditMod(true)} src={edit} alt="" />
+                                        {/* <img className="cursor-pointer" onClick={() => setEditMod(true)} src={edit} alt="" /> */}
                                         <img className="cursor-pointer" src={del} alt="" />
                                     </div>
                                 </Table.Cell>
@@ -56,12 +56,12 @@ export default function ListTransaction() {
                             setShow={setModal}
                         />
                     )}
-                    {editMod && (
+                    {/* {editMod && (
                         <EditModal
                             show={editMod}
                             setShow={setEditMod}
                         />
-                    )}
+                    )} */}
                 </div>
             </div>
             <FooterBar />
