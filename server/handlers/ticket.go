@@ -79,6 +79,8 @@ func (h *handlerTicket) AddTicket(w http.ResponseWriter, r *http.Request) {
 		TypeTrain:            r.FormValue("type_train"),
 		StartDate:            r.FormValue("start_date"),
 		StartTime:            r.FormValue("start_time"),
+		StartCity:            r.FormValue("start_city"),
+		DestinationCity:      r.FormValue("destination_city"),
 		ArrivalTime:          r.FormValue("arrival_time"),
 		ArrivalDate:          r.FormValue("arrival_date"),
 		StartStationID:       start_station_id,
@@ -88,17 +90,24 @@ func (h *handlerTicket) AddTicket(w http.ResponseWriter, r *http.Request) {
 	}
 
 	Field := models.Ticket{
+		ID:                   userId,
 		NameTrain:            request.NameTrain,
 		TypeTrain:            request.TypeTrain,
 		StartStationID:       request.StartStationID,
+		StartStation:         models.StationResponse{},
 		StartDate:            request.StartDate,
+		StartCity:            request.StartCity,
 		StartTime:            request.StartTime,
 		ArrivalTime:          request.ArrivalTime,
 		ArrivalDate:          request.ArrivalDate,
+		DestinationCity:      request.DestinationCity,
+		DestinationStation:   models.StationResponse{},
 		DestinationStationID: request.DestinationStationID,
 		Price:                request.Price,
 		Qty:                  request.Qty,
 		UserID:               userId,
+		CreatedAt:            time.Time{},
+		UpdatedAt:            time.Time{},
 	}
 
 	newTicket, err := h.TicketRepository.AddTicket(Field)
@@ -119,6 +128,8 @@ func (h *handlerTicket) AddTicket(w http.ResponseWriter, r *http.Request) {
 		StartTime:            newTicket.StartTime,
 		ArrivalTime:          newTicket.ArrivalTime,
 		ArrivalDate:          newTicket.ArrivalDate,
+		StartCity:            newTicket.StartCity,
+		DestinationCity:      newTicket.DestinationCity,
 		DestinationStation:   newTicket.DestinationStation,
 		DestinationStationID: newTicket.DestinationStationID,
 		Price:                newTicket.Price,

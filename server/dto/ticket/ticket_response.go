@@ -10,6 +10,8 @@ type TicketResponse struct {
 	StartDate            string    `json:"start_date" gorm:"type: varchar(255)"`
 	StartStationID       int       `json:"start_station_id" form:"start_station_id"`
 	StartTime            string    `json:"start_time" gorm:"type: varchar(255)"`
+	StartCity            string    `json:"start_city" gorm:"type: varchar(255)"`
+	DestinationCity      string    `json:"destination_city" gorm:"type: varchar(255)"`
 	DestinationStationID int       `json:"destination_station_id" form:"destination_station_id"`
 	ArrivalTime          string    `json:"arrival_time" gorm:"type: varchar(255)"`
 	ArrivalDate          string    `json:"arrival_Date" gorm:"type: varchar(255)"`

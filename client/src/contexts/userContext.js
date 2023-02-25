@@ -2,6 +2,7 @@ import React, { createContext, useReducer } from "react";
 
 export const UserContext = createContext();
 
+
 const defaultState = {
     isLogin: false,
     user: {},
@@ -9,7 +10,7 @@ const defaultState = {
 }
 
 const reducer = (user, action) => {
-    const {type, payload} = action
+    const { type, payload } = action
 
     switch (type) {
         case 'USER_SUCCESS':
@@ -17,8 +18,8 @@ const reducer = (user, action) => {
             localStorage.setItem("token", payload.token)
             console.log(payload)
             return {
-                isLogin:true,
-                user:payload
+                isLogin: true,
+                user: payload
             };
         case 'ADD_CART_SUCCESS':
             return {
@@ -37,9 +38,10 @@ const reducer = (user, action) => {
 
 export const UserContextProvider = ({ children }) => {
     const [state, dispatch] = useReducer(reducer, defaultState)
+
     return (
-        <UserContext.Provider value={ [state, dispatch] }>
-            { children }
+        <UserContext.Provider value={[state, dispatch]}>
+            {children}
         </UserContext.Provider>
     )
 }

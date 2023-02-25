@@ -42,9 +42,9 @@ export default function MyTicket() {
                 arrival_time: ticket.arrival_time,
                 ticket_id: ticket.id,
                 user_id: user.id,
-                total: ticket.total,
+                total: ticket.price,
                 qty: ticket.qty,
-                status: "Pending",
+                status: "pending",
 
             });
 
@@ -126,9 +126,9 @@ export default function MyTicket() {
                                         <h6 className="text-sm">{ticket?.arrival_date}</h6>
                                     </div>
                                     <div>
-                                        <h5 className="font-bold text-lg">Jakarta(GMR)</h5>
+                                        <h5 className="font-bold text-lg">{ticket?.start_city}</h5>
                                         <h6 className="text-sm mb-3">{ticket?.start_station.name}</h6>
-                                        <h5 className="font-bold text-lg">Surabaya(SBY)</h5>
+                                        <h5 className="font-bold text-lg">{ticket?.destination_city}</h5>
                                         <h6 className="text-sm">{ticket?.destination_station.name}</h6>
                                     </div>
                                 </div>

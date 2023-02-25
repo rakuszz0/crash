@@ -112,7 +112,7 @@ func (h *handlerTransaction) CreateTransaction(w http.ResponseWriter, r *http.Re
 		// Ticket:   request.ticket,
 		// Total:    request.total,
 		// Qty:      request.qty,
-		Status: request.Status,
+		Status: "pending",
 		// }
 		StartTime:   request.StartTime,
 		ArrivalTime: request.ArrivalTime,
@@ -142,7 +142,7 @@ func (h *handlerTransaction) CreateTransaction(w http.ResponseWriter, r *http.Re
 	}
 
 	s := snap.Client{}
-	s.New(os.Getenv("SERVER_KEY"), midtrans.Sandbox)
+	s.New("SB-Mid-server-3JWScOa4pa0QJjHG4vAEzCmh", midtrans.Sandbox)
 
 	req := &snap.Request{
 		TransactionDetails: midtrans.TransactionDetails{

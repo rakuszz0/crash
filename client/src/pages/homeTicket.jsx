@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import LandingPage from "./landingPage";
 import FooterBar from "../components/footer";
 import { Card, Table } from "flowbite-react";
@@ -10,11 +10,13 @@ import panah from "../assets/Rounded.png"
 import arow from "../assets/Arrow 5.png";
 import { Button, Checkbox } from "flowbite-react";
 import MyModal from "../components/modalAdd";
-import { useContext } from "react";
 import { UserContext } from "../contexts/userContext";
 import Moment from "react-moment";
+import { TicketContext } from "../contexts/ticketContext";
+import FormLogin from "../components/auth/login";
 
 export default function HomeTicket({ setShow }) {
+    const { ticket } = useContext(TicketContext);
     const [isOpen, setIsOpen] = useState(false)
     const [showLogin, setShowLogin] = useState(false)
     const [state, _] = useContext(UserContext)
@@ -30,19 +32,13 @@ export default function HomeTicket({ setShow }) {
 
     console.log("week =>", weektomorrow);
 
-    const handleDisabled = (event) => {
-        if (event.target.checked) {
-            setShow(true);
-        } else {
-            setShow(false);
-        }
-    };
-
-    useEffect(() => {
-        if (state.isLogin === true) {
-            setShowLogin(false)
-        }
-    }, [state.isLogin])
+    // const handleDisabled = (event) => {
+    //     if (event.target.checked) {
+    //         setShow(true);
+    //     } else {
+    //         setShow(false);
+    //     }
+    // };
 
     const [formSearch, setFormSearch] = useState({
         start_station_id: "",
@@ -52,22 +48,22 @@ export default function HomeTicket({ setShow }) {
     });
     const { start_station_id, destination_station_id, start_date, qty } = formSearch;
 
-    // const handleChange = (e) => {
-    //     setFormSearch({
-    //         ...formSearch,
-    //         [e.target.name]: e.target.value,
-    //     });
+    const handleChange = (e) => {
+        setFormSearch({
+            ...formSearch,
+            [e.target.name]: e.target.value,
+        });
 
-    //     if (e.target.type === "date") {
-    //         let newDate = new Date(e.target.value).format("yyyy-dd-mm");
-    //         setFormSearch({ jadwal: newDate });
-    //     }
-    // };
-    // let { data: time } = useQuery("tickesCache", async () => {
-    //     const response = await API.get('/tickets');
-    //     return response.data.data;
-    // });
-    // console.log(time)
+        if (e.target.type === "date") {
+            let newDate = new Date(e.target.value).format("yyyy-dd-mm");
+            setFormSearch({ jadwal: newDate });
+        }
+    };
+    let { data: time } = useQuery("tickesCache", async () => {
+        const response = await API.get('/tickets');
+        return response.data.data;
+    });
+    console.log(time)
 
     let { data: tickets } = useQuery('ticketsCache', async () => {
         const response = await API.get('/tickets');
@@ -107,6 +103,7 @@ export default function HomeTicket({ setShow }) {
 
     return (
         <>
+
             <LandingPage />
             <div className="container left-0 right-0 mx-auto px-10 h-auto">
                 <div className="relative top-[-2rem] flex mx-20 rounded-md shadow-xl">
@@ -235,8 +232,8 @@ export default function HomeTicket({ setShow }) {
                     </div>
                 </Card>
                 {tickets?.map((item, index) => (
+                    <Card onClick={() => { state.isLogin == false ? setShowLogin(true) : navigate(`/my-ticket/${item.id}`) }}
 
-                    <Card onClick={() => navigate(`/my-ticket/${item.id}`)}
                         key={index} className="my-5 cursor-pointer">
                         <div className="flex justify-between">
                             <div>
@@ -257,9 +254,9 @@ export default function HomeTicket({ setShow }) {
                             <div>
                                 <h2 className="font-semibold">
                                     {/* <Moment
-                                        duration={item.start_time}
-                                        date={item.arrival_time}
-                                    /> */}
+        duration={item.start_time}
+        date={item.arrival_time}
+    /> */}
                                     <Moment format="HH:mm">
                                         {item.arrival_time}
                                     </Moment>
@@ -270,13 +267,20 @@ export default function HomeTicket({ setShow }) {
                             </div>
                         </div>
                     </Card>
-                ))}
+                ))
+                }
 
                 {isOpen && (
                     <MyModal
                         show={isOpen}
                         setShow={setIsOpen}
                         setIsOpen={setIsOpen}
+                    />
+                )}
+                {showLogin && (
+                    <FormLogin
+                        show={showLogin}
+                        setShow={setShowLogin}
                     />
                 )}
             </div>

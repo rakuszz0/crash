@@ -58,9 +58,9 @@ export default function ModalDetailTicket({ show, setShow }) {
                                             <h6 className="text-sm">{itemt.ticket.arrival_date}</h6>
                                         </div>
                                         <div className="flex-[50%]">
-                                            <h6 className="font-bold">Jakarta (GMR)</h6>
+                                            <h6 className="font-bold">{itemt.ticket.start_city}</h6>
                                             <h6 className="text-sm mb-4">{itemt.ticket.start_station.name}</h6>
-                                            <h6 className="font-bold">Semarang (SMR)</h6>
+                                            <h6 className="font-bold">{itemt.ticket.destination_city}</h6>
                                             <h6 className="text-sm">{itemt.ticket.destination_station.name}</h6>
                                         </div>
                                     </div>

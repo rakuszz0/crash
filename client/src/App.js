@@ -10,6 +10,7 @@ import ListTransaction from './pages/indexAdmin';
 import MyTicket from './pages/myTiket';
 import Payment from './pages/payment';
 import PrivateRoute from './pages/privetroutesAdm';
+import { TicketContextProvider } from './contexts/ticketContext';
 
 function App() {
   const navigate = useNavigate();
@@ -61,17 +62,19 @@ function App() {
   return (
     <>
       <Navbar />
-      <Routes>
-        <Route exact path='/' element={<HomeTicket />} />
-        {/* <Route exact path='/my-ticket' element={<MyTicket/>} /> */}
-        <Route exact path='/my-ticket/:id' element={<MyTicket />} />
-        <Route exact path='/payment' element={<Payment />} />
+      <TicketContextProvider>
+        <Routes>
+          <Route exact path='/' element={<HomeTicket />} />
+          {/* <Route exact path='/my-ticket' element={<MyTicket/>} /> */}
+          <Route exact path='/my-ticket/:id' element={<MyTicket />} />
+          <Route exact path='/payment' element={<Payment />} />
 
-        {/* <Route exact path='/admin' element={<PrivateRoute />}> */}
-        <Route exact path='/add-ticket' element={<AddTicket />} />
-        <Route exact path='/index-admin' element={<ListTransaction />} />
-        {/* </Route> */}
-      </Routes>
+          {/* <Route exact path='/admin' element={<PrivateRoute />}> */}
+          <Route exact path='/add-ticket' element={<AddTicket />} />
+          <Route exact path='/index-admin' element={<ListTransaction />} />
+          {/* </Route> */}
+        </Routes>
+      </TicketContextProvider>
     </>
   );
 }

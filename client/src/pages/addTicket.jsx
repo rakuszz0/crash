@@ -136,8 +136,10 @@ export default function AddTicket() {
             formData.append("type_train", form.type_train);
             formData.append("start_date", form.start_date);
             formData.append("start_station_id", form.start_station_id);
+            formData.append("start_city", form.start_city)
             formData.append("start_time", form.start_time);
             formData.append("destination_station_id", form.destination_station_id);
+            formData.append("destination_city", form.destination_city)
             formData.append("arrival_time", form.arrival_time);
             formData.append("arrival_date", form.arrival_date);
             formData.append("price", form.price);
@@ -197,6 +199,9 @@ export default function AddTicket() {
                             </select>
                         </div>
                         <div>
+                            <input placeholder="Start City" onChange={handleChange} type="text" name="start_city" className="block w-full text-sm focus:ring-red-300 focus:border-red-500 text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none" ></input>
+                        </div>
+                        <div>
                             <input type="text" name="start_time" onChange={handleChange} placeholder="Start Time" className="block w-full text-sm focus:ring-red-300 focus:border-red-500 text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none" />
                         </div>
                         <div>
@@ -210,6 +215,9 @@ export default function AddTicket() {
                                     <option key={index} value={item?.id}>{item?.name}</option>
                                 ))}
                             </select>
+                        </div>
+                        <div>
+                            <input placeholder="Destination City" onChange={handleChange} type="text" name="destination_city" className="block w-full text-sm focus:ring-red-300 focus:border-red-500 text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none" ></input>
                         </div>
                         <div>
                             <input placeholder="Arival Date" onChange={handleChange} type="date" name="arrival_date" className="block w-full text-sm focus:ring-red-300 focus:border-red-500 text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none" />

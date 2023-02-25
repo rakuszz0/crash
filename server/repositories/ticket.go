@@ -53,7 +53,7 @@ func (r *repository) AddTicket(ticket models.Ticket) (models.Ticket, error) {
 
 func (r *repository) GetTicket(ID int) (models.Ticket, error) {
 	var ticket models.Ticket
-	err := r.db.Preload("StartStation").Preload("DestinationStation").First(&ticket, "id = ?", ID).Error
+	err := r.db.Preload("StartStation").Preload("DestinationStation").First(&ticket, ID).Error
 
 	return ticket, err
 }
